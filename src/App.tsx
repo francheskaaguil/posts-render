@@ -1,17 +1,14 @@
-import { Layout } from "@/components/layout";
-import { About } from "@/pages/About";
-import { PostsList } from "@/features/posts/PostsList";
-import { CommentsList } from "@/features/comments/CommentsList";
+import { Route, Routes } from "react-router";
+import HomeScreen from "./pages/HomeScreen";
+import Layout from "./components/layout";
 
 function App() {
   return (
-    <Layout>
-      <div className="space-y-8">
-        <About />
-        <PostsList />
-        <CommentsList />
-      </div>
-    </Layout>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomeScreen />} />
+      </Route>
+    </Routes>
   );
 }
 
