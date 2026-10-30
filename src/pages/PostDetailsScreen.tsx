@@ -1,8 +1,14 @@
+
 import { isAxiosError } from "axios";
 import { Link, useParams } from "react-router";
+
+import { Avatar } from "@/components/avatar";
+import { FormattedDate } from "@/components/formatted-date";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button-variants";
 import { Skeleton } from "@/components/ui/skeleton";
+
+import { CommentList } from "@/features/comments/components/CommentList";
 import { usePost } from "@/features/posts/posts.hooks";
 import { gutter } from "@/lib/layout";
 
@@ -61,13 +67,24 @@ const PostDetailsScreen = () => {
     <article className="mt-12">
       <div className={gutter}>
         <span className="text-sm text-muted-foreground">#{data.id}</span>
+
         <div>
           <h1 className="font-reading text-3xl leading-tight tracking-tight">
             {data.title}
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Written by User {data.userId}
-          </p>
+
+          <div className="mt-4 flex items-center gap-3">
+            <Avatar>U</Avatar>
+            <div>
+              <p className="text-sm font-medium">
+                User {data.userId}
+              </p>
+              <FormattedDate
+                value={data.createdAt}
+                className="text-xs text-muted-foreground"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -77,6 +94,8 @@ const PostDetailsScreen = () => {
           {toParagraphs(data.body).map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
           ))}
+
+          <CommentList postId={data.id} />
         </div>
       </div>
     </article>
