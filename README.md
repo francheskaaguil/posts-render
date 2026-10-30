@@ -5,19 +5,19 @@ Tailwind CSS v4, and shadcn/ui.
 
 ## Technologies Used
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS v4
-- shadcn/ui
-- Lucide React
+* React
+* TypeScript
+* Vite
+* Tailwind CSS v4
+* shadcn/ui
+* Lucide React
 
 ## Features
 
-- Light, Dark, and System theme modes
-- Responsive application layout
-- Reusable UI components
-- Organized project structure
+* Light, Dark, and System theme modes
+* Responsive application layout
+* Reusable UI components
+* Organized project structure
 
 ## Installation
 
@@ -34,6 +34,17 @@ Tailwind CSS v4, and shadcn/ui.
 
 npm run build
 
+\## Live Demo
+
+
+
+Visit the deployed application:
+
+
+
+https://posts-render-seven.vercel.app
+
 ## Developer
 
 Francheska Nicole Aguil
+
