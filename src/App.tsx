@@ -1,15 +1,10 @@
-
 import { Layout } from "@/components/layout";
+import { About } from "@/pages/About";
 
 function App() {
   return (
     <Layout>
-      <div className="space-y-2">
-        <h2 className="text-2xl font-semibold">Welcome to Posts Reader</h2>
-        <p className="text-muted-foreground">
-          Read and explore your favorite posts here.
-        </p>
-      </div>
+      <About />
     </Layout>
   );
 }
