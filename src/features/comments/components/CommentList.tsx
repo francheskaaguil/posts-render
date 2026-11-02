@@ -1,59 +1,59 @@
 import { Button } from "@/components/ui/button";
+import { gutter } from "@/lib/layout";
 import { useComments } from "../comments.hooks";
-import { Comment, CommentSkeleton } from "./Comment";
+import type { Comment as CommentType } from "../comments.types";
+import CommentItem, { CommentItemSkeleton } from "./Comment";
 
-type CommentListProps = {
-  postId: number;
-};
-
-export function CommentList({ postId }: CommentListProps) {
-  const { data, isPending, isError, refetch } = useComments(postId);
+const CommentList = ({ postId }: { postId: CommentType["postId"] }) => {
+  const { isPending, isError, error, data, refetch } = useComments(postId);
 
   return (
-    <section className="mt-12 space-y-6">
-      <div className="flex items-center gap-2">
-        <h2 className="font-reading text-2xl font-semibold">
-          Comments
-        </h2>
-        {data && (
-          <span className="text-sm text-muted-foreground">
-            ({data.length})
-          </span>
-        )}
+    <section className={`mt-16 border-t border-border pt-10 ${gutter}`}>
+      <p className="text-sm tabular-nums text-muted-foreground sm:mt-0.5 sm:text-right">
+        {data ? data.length : null}
+      </p>
+      <div className="min-w-0">
+        <h2 className="text-sm font-medium tracking-tight">Comments</h2>
+        <div className="mt-6 flex flex-col gap-3">
+          {isPending && (
+            <>
+              <p role="status" className="sr-only">
+                Loading comments
+              </p>
+              <div aria-hidden className="flex flex-col gap-3">
+                {[1, 2, 3].map((index) => (
+                  <CommentItemSkeleton key={index} />
+                ))}
+              </div>
+            </>
+          )}
+          {isError && (
+            <div>
+              <p className="text-[0.9375rem] leading-relaxed text-muted-foreground">
+                {error.message}
+              </p>
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-4"
+                onClick={() => refetch()}
+              >
+                Try again
+              </Button>
+            </div>
+          )}
+          {data?.length === 0 && (
+            <p className="text-[0.9375rem] text-muted-foreground">
+              No comments on this post.
+            </p>
+          )}
+          {data?.map((comment) => (
+            <CommentItem comment={comment} key={comment.id} />
+          ))}
+        </div>
       </div>
-
-      {isPending && (
-        <div className="space-y-4">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <CommentSkeleton key={index} />
-          ))}
-        </div>
-      )}
-
-      {isError && (
-        <div className="space-y-3">
-          <p className="text-sm text-destructive">
-            Unable to load comments.
-          </p>
-          <Button variant="outline" onClick={() => refetch()}>
-            Try again
-          </Button>
-        </div>
-      )}
-
-      {!isPending && !isError && data?.length === 0 && (
-        <p className="text-sm text-muted-foreground">
-          No comments yet.
-        </p>
-      )}
-
-      {!isPending && !isError && data && data.length > 0 && (
-        <div className="space-y-4">
-          {data.map((comment) => (
-            <Comment key={comment.id} comment={comment} />
-          ))}
-        </div>
-      )}
     </section>
   );
-}
+};
+
+export default CommentList;

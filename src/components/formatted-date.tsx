@@ -1,13 +1,16 @@
+
+const formatter = new Intl.DateTimeFormat(undefined, {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
 type FormattedDateProps = {
   value: string | undefined;
   className?: string;
 };
 
-const dateFormatter = new Intl.DateTimeFormat("en-US", {
-  dateStyle: "medium",
-});
-
-export function FormattedDate({ value, className }: FormattedDateProps) {
+const FormattedDate = ({ value, className }: FormattedDateProps) => {
   if (!value) return null;
 
   const date = new Date(value);
@@ -16,7 +19,9 @@ export function FormattedDate({ value, className }: FormattedDateProps) {
 
   return (
     <time dateTime={value} className={className}>
-      {dateFormatter.format(date)}
+      {formatter.format(date)}
     </time>
   );
-}
+};
+
+export default FormattedDate;

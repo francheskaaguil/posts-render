@@ -34,7 +34,7 @@ Tailwind CSS v4, and shadcn/ui.
 
 npm run build
 
-\## Live Demo
+## Live Demo
 
 
 
@@ -42,9 +42,8 @@ Visit the deployed application:
 
 
 
-https://posts-render-seven.vercel.app
+[posts-render-seven.vercel.app](https://posts-render-seven.vercel.app)
 
 ## Developer
 
 Francheska Nicole Aguil
-
